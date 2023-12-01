@@ -137,7 +137,6 @@ def train_model(model_config: config.ModelConfig, train_config: config.TrainConf
     scalars = {  # Audio reconstruction negative log prob + monitoring metrics comparable across all models
         'Audio/LogProbLoss/Train': EpochMetric(), 'Audio/LogProbLoss/Valid': EpochMetric(),
         'Audio/MSE/Train': EpochMetric(), 'Audio/MSE/Valid': EpochMetric(),
-        # 'AudioLoss/SC/Train': EpochMetric(), 'AudioLoss/SC/Valid': EpochMetric(),  # TODO
         # Latent-space and VAE losses
         'Latent/Loss/Train': EpochMetric(), 'Latent/Loss/Valid': EpochMetric(),  # ELBO-DKL, without beta
         'Latent/BackpropLoss/Train': EpochMetric(), 'Latent/BackpropLoss/Valid': EpochMetric(),  # ELBO-DKL * beta
