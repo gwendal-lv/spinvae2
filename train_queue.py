@@ -70,6 +70,7 @@ for lr in [5e-4]:
                 'beta': beta
             })
 
+
 if __name__ == "__main__":
     if duplicate_code:
         import sys
