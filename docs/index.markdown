@@ -16,6 +16,7 @@ classes: wide
 
 *Authors: Gwendal Le Vaillant and Thierry Dutoit ([ISIA Lab](https://web.umons.ac.be/isia/), University of Mons)*
 
+TASLP submission, supplemental material. 
 Work in progress.
 
 ---
