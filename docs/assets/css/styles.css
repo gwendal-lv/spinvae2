@@ -1,0 +1,27 @@
+
+p, li {
+    font-size: medium !important;
+}
+
+.small_control {
+    width: 100px;
+}
+
+.play_button {
+    height: 1.3rem;
+    padding: 6px 6px;
+}
+
+.soundwave {
+    height: 1.0rem;
+    visibility: hidden;
+}
+
+.centered_th {
+    text-align: center;
+}
+
+.bestresult {
+    background-color:rgb(241, 241, 241);
+    font-weight: bold;
+}
