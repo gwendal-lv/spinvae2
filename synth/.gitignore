@@ -1,0 +1,15 @@
+
+.ipynb_checkpoints/*
+
+# Temp wav files can be generated in this folder
+*.wav
+
+# TODO add these to the repo?
+dexed_presets/*
+diva_presets/*
+
+# temp backup sqlite DBs
+*.backup
+
+librenderman.so.dylib
+librenderman.so
