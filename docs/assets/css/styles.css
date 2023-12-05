@@ -12,13 +12,28 @@ p, li {
     padding: 6px 6px;
 }
 
+.stop_button {
+    height: 1.2rem;
+    padding: 6px 6px;
+}
+
 .soundwave {
     height: 1.0rem;
     visibility: hidden;
 }
 
+.soundwave_vspace {
+    height: 1.0rem;
+    margin: 0.4rem;
+    visibility: hidden;
+}
+
 .centered_th {
     text-align: center;
+}
+
+tr.no-bottom-border td {
+    border-bottom: none
 }
 
 .bestresult {

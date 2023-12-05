@@ -19,6 +19,11 @@ classes: wide
 TASLP submission, supplemental material. 
 Work in progress.
 
+Contents:
+- <a href="#interpolation-between-presets">Interpolation between presets</a>
+- <a href="#spinvae-2-extrapolations">Extrapolation</a>
+- <a href="#presets-modulation">Presets modulation</a>
+
 ---
 
 # Interpolation between presets
@@ -597,6 +602,9 @@ Work in progress.
 
 ---
 
+---
+
+
 # SPINVAE-2 Extrapolations
 
 ### Extrapolation example 1
@@ -785,3 +793,90 @@ Work in progress.
     </table>
 </div>
 
+
+
+---
+---
+
+
+# Presets Modulation
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+    //,
+    //displayAlign: "left",
+    //displayIndent: "2em"
+  });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+
+Under the Variational Auto-Encoder (VAE) framework, a preset $$\mathbf{u}$$ can be encoded as a Gaussian distribution $$ q \left( \mathbf{z} \mid \mathbf{u} \right) $$ in the latent space, where $$\mathbf{z}$$ denotes a latent vector.
+The distribution is defined as $$ q \left( \mathbf{z} \mid \mathbf{u} \right) = \mathcal{N} \left( \mathbf{z} ; \mu, \sigma^2 \right) $$ where $$\mu, \sigma$$ are output vectors from the Transformer encoder.
+
+New presets, similar to the original $$\mathbf{u}$$, can be obtained by sampling some latent vectors $$ \mathbf{z} \sim q \left( \mathbf{z} \mid \mathbf{u} \right) $$ then decoding them into presets.
+This is a form of modulation, which can be used to make a preset slightly evolve over time and sound more dynamic.
+
+In order to obtain more creative presets, standard deviations of the Gaussian distribution can be artificially increased.
+Examples presented below use standard deviations of $$ 2 \sigma $$ and $$ 3 \sigma $$, where $$ \sigma $$ is  computed from the original preset $$ \mathbf{u} $$.
+
+### Modulation example 1
+
+
+<div class="figure">
+    <table>
+        <tr class="no-bottom-border">
+            <th colspan="2" class="no-bottom-border">Original preset "CP-70" (no modulation)</th>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="onPlaySingleSound(0);">
+                    <img src="assets/svg/play.svg" class="play_button"/>
+                </button> <br>
+                <img src="assets/svg/soundwave.svg" id="singleWave0" class="soundwave_vspace"/> <br>
+                <button type="button" onclick="onStopSingleSound(0);">
+                    <img src="assets/svg/stop.svg" class="stop_button"/>
+                </button>
+            </td>
+            <td><img src="assets/latent_variations/018765_sigma2.0/original.png"/></td>
+        </tr>
+        <tr class="no-bottom-border">
+            <th colspan="2" class="no-bottom-border"><br>Modulation, 2&sigma; standard deviation</th>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="onPlaySingleSound(1);">
+                    <img src="assets/svg/play.svg" class="play_button"/>
+                </button> <br>
+                <img src="assets/svg/soundwave.svg" id="singleWave1" class="soundwave_vspace"/> <br>
+                <button type="button" onclick="onStopSingleSound(1);">
+                    <img src="assets/svg/stop.svg" class="stop_button"/>
+                </button>
+            </td>
+            <td><img src="assets/latent_variations/018765_sigma2.0/variations.png"/></td>
+        </tr>
+        <tr class="no-bottom-border">
+            <th colspan="2" class="no-bottom-border"><br>Modulation, 3&sigma; standard deviation</th>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="onPlaySingleSound(2);">
+                    <img src="assets/svg/play.svg" class="play_button"/>
+                </button> <br>
+                <img src="assets/svg/soundwave.svg" id="singleWave2" class="soundwave_vspace"/> <br>
+                <button type="button" onclick="onStopSingleSound(2);">
+                    <img src="assets/svg/stop.svg" class="stop_button"/>
+                </button>
+            </td>
+            <td><img src="assets/latent_variations/018765_sigma3.0/variations.png"/></td>
+        </tr>
+    </table>
+</div>

@@ -125,7 +125,7 @@ audio_static_filenames = [
 Howler.autoSuspend = false;
 HowlerGlobal.autoSuspend = false;
 
-__debug_prints = true;
+__debug_prints = false;
 
 // Sounds - "Automatic caching for improved performance"
 let sounds = [];  // 1st dim: sequence (we may have only 1); 2nd dim: actual audio filename
@@ -258,5 +258,70 @@ function onPlayABSequenceButtonClicked(seq_index) {  // Play A (start sample), t
     isPlayingWholeSequence = true;
     currentSequenceIndex = seq_index;
     playSound(seq_index, 0);  // on Sound Ends will handle the following sounds
+}
+
+
+
+
+
+// ==============================================================================
+// ================== Single (isolated) samples: play and stop ==================
+
+single_sounds_filenames = [
+    'assets/latent_variations/018765_sigma2.0/original.mp3',
+    'assets/latent_variations/018765_sigma2.0/variations.mp3',
+    'assets/latent_variations/018765_sigma3.0/variations.mp3',
+]
+
+// Sounds - "Automatic caching for improved performance"
+let single_sounds = [];  // 1st dim: sequence (we may have only 1); 2nd dim: actual audio filename
+for (const [__index, audio_filename] of single_sounds_filenames.entries()) {
+    single_sounds.push(new Howl({
+        src: [audio_filename],
+        onload: function() {
+            if (__debug_prints)
+                console.log("Single sound # " + __index + " : " + audio_filename + " loaded.");
+        },
+        onloaderror: function(sound_ID, error_code) {
+            console.log("SOUND LOAD ERROR id = " + sound_ID + '   code = ' + error_code);
+        },
+        onplayerror: function(sound_ID, error_code) {
+            console.log("SOUND PLAY ERROR id = " + sound_ID + '   code = ' + error_code);
+        },
+        onend: function() { onSingleSoundEnds(__index); },  // NOT called when forced to stop
+    }));
+    // Cannot register this callback during construction...
+    //single_sounds[__index].on('end', function() { console.log("END CALLBACK"); onSingleSoundEnds(__index); });
+}
+
+/*
+for (const [__index, sound] of single_sounds.entries()) {
+    sound.on('end', function () {
+        onSingleSoundEnds(__index)  // TODO register callbacks during construction of Howl objects
+    });
+}
+*/
+
+function onSingleSoundEnds(sound_index) {
+    if (__debug_prints)
+        console.log("Single sound #" + sound_index + " had ended.")
+    // Hide waveform
+    document.getElementById("singleWave" + sound_index).style.visibility = 'hidden';
+}
+
+function onPlaySingleSound(sound_index) {
+    if (__debug_prints)
+        console.log("Playing single sound #" + sound_index);
+
+    single_sounds[sound_index].play();
+    document.getElementById("singleWave" + sound_index).style.visibility = 'visible';
+}
+
+function onStopSingleSound(sound_index) {
+    if (__debug_prints)
+        console.log("Stopping single sound #" + sound_index);
+
+    single_sounds[sound_index].stop();
+    onSingleSoundEnds(sound_index);  // this callback is not auto-called when sound if stopped "by hand"
 }
 
