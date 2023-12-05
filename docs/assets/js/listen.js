@@ -316,6 +316,7 @@ function onPlaySingleSound(sound_index) {
     if (__debug_prints)
         console.log("Playing single sound #" + sound_index);
 
+    single_sounds[sound_index].stop(); // otherwise, multiple plays are allowed
     single_sounds[sound_index].play();
     document.getElementById("singleWave" + sound_index).style.visibility = 'visible';
 }
