@@ -827,9 +827,10 @@ This is a form of modulation, which can be used to make a preset slightly evolve
 
 In order to obtain more creative presets, standard deviations of the Gaussian distribution can be artificially increased.
 Examples presented below use standard deviations of $$ 2 \sigma $$ and $$ 3 \sigma $$, where $$ \sigma $$ is  computed from the original preset $$ \mathbf{u} $$.
+I.e., latent vectors are sampled from $$\mathcal{N} \left( \mathbf{z} ; \mu, \left(2\sigma\right)^2 \right) $$ and $$\mathcal{N} \left( \mathbf{z} ; \mu, \left(3\sigma\right)^2 \right) $$, and are finally used to generate modulated presets.
+
 
 ### Modulation example 1
-
 
 <div class="figure">
     <table>
@@ -880,3 +881,58 @@ Examples presented below use standard deviations of $$ 2 \sigma $$ and $$ 3 \sig
         </tr>
     </table>
 </div>
+
+
+### Modulation example 2
+
+<div class="figure">
+    <table>
+        <tr class="no-bottom-border">
+            <th colspan="2" class="no-bottom-border">Original preset "CHEAPO" (no modulation)</th>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="onPlaySingleSound(3);">
+                    <img src="assets/svg/play.svg" class="play_button"/>
+                </button> <br>
+                <img src="assets/svg/soundwave.svg" id="singleWave3" class="soundwave_vspace"/> <br>
+                <button type="button" onclick="onStopSingleSound(3);">
+                    <img src="assets/svg/stop.svg" class="stop_button"/>
+                </button>
+            </td>
+            <td><img src="assets/latent_variations/021232_sigma2.0/original.png"/></td>
+        </tr>
+        <tr class="no-bottom-border">
+            <th colspan="2" class="no-bottom-border"><br>Modulation, 2&sigma; standard deviation</th>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="onPlaySingleSound(4);">
+                    <img src="assets/svg/play.svg" class="play_button"/>
+                </button> <br>
+                <img src="assets/svg/soundwave.svg" id="singleWave4" class="soundwave_vspace"/> <br>
+                <button type="button" onclick="onStopSingleSound(4);">
+                    <img src="assets/svg/stop.svg" class="stop_button"/>
+                </button>
+            </td>
+            <td><img src="assets/latent_variations/021232_sigma2.0/variations.png"/></td>
+        </tr>
+        <tr class="no-bottom-border">
+            <th colspan="2" class="no-bottom-border"><br>Modulation, 3&sigma; standard deviation</th>
+        </tr>
+        <tr>
+            <td>
+                <button type="button" onclick="onPlaySingleSound(5);">
+                    <img src="assets/svg/play.svg" class="play_button"/>
+                </button> <br>
+                <img src="assets/svg/soundwave.svg" id="singleWave5" class="soundwave_vspace"/> <br>
+                <button type="button" onclick="onStopSingleSound(5);">
+                    <img src="assets/svg/stop.svg" class="stop_button"/>
+                </button>
+            </td>
+            <td><img src="assets/latent_variations/021232_sigma3.0/variations.png"/></td>
+        </tr>
+    </table>
+</div>
+
+

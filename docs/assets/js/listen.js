@@ -271,6 +271,9 @@ single_sounds_filenames = [
     'assets/latent_variations/018765_sigma2.0/original.mp3',
     'assets/latent_variations/018765_sigma2.0/variations.mp3',
     'assets/latent_variations/018765_sigma3.0/variations.mp3',
+    'assets/latent_variations/021232_sigma2.0/original.mp3',
+    'assets/latent_variations/021232_sigma2.0/variations.mp3',
+    'assets/latent_variations/021232_sigma3.0/variations.mp3',
 ]
 
 // Sounds - "Automatic caching for improved performance"
