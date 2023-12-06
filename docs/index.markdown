@@ -8,9 +8,26 @@ classes: wide
 
 ---
 
-
 <script type="text/javascript" src="assets/js/howler.min.js"></script>
 <script type="text/javascript" src="assets/js/listen.js"></script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
+      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+    //,
+    //displayAlign: "left",
+    //displayIndent: "2em"
+  });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+</script>
 
 <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -27,6 +44,15 @@ Contents:
 ---
 
 # Interpolation between presets
+
+Preset interpolation is usually performed by computing a linear interpolation on each individual synthesis parameter.
+This method is called <em>Reference (linear)</em>.
+
+Our work introduces a preset morphing method based on the <em>SPINVAE-2</em> model. First, the start and end presets, $$ \mathbf{u}^{(n)} $$ and $$ \mathbf{u}^{(m)} $$, are encoded into latent vectors $$ \mathbf{z}^{(n)} $$ and $$ \mathbf{z}^{(m)} $$.
+Second, a linear interpolation produces a series of intermediate latent codes $\lbrace \mathbf{z}[t], t \in [1, T] \rbrace$ vectors, where $\mathbf{z}[1] = \mathbf{z}^{(n)}$ and $\mathbf{z}[T] = \mathbf{z}^{(m)}$.
+Third, the preset morphing is finally obtained by decoding each $\mathbf{z}[t]$ into an intermediate preset.
+
+Examples below use $$T = 7$$ interpolation steps for both methods.
 
 ### Interpolation example 1
 
@@ -51,49 +77,6 @@ Contents:
             <td>Step 5/7</td>
             <td>Step 6/7</td>
             <td>Step 7/7</td>
-        </tr>
-        <tr> <!-- SPINVAE interp -->
-            <th scope="row">
-                <button type="button" id="playSequence4" onclick="onPlaySequenceButtonClicked(4)">
-                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
-                </button>
-                <br>  <br> SPINVAE-2 <br> &nbsp;
-            </th>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave0" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step00.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave1" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step01.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave2" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step02.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave3" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step03.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave4" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step04.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave5" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step05.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(4, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq4_wave6" class="soundwave"/><br />
-                <img src="assets/interpolation/254_spinvae/spectrogram_step06.png"/>
-            </td>
         </tr>
         <tr> <!-- REFERENCE interp -->
             <th scope="row">
@@ -138,6 +121,49 @@ Contents:
                 <img src="assets/interpolation/254_reference/spectrogram_step06.png"/>
             </td>
         </tr>
+        <tr> <!-- SPINVAE interp -->
+            <th scope="row">
+                <button type="button" id="playSequence4" onclick="onPlaySequenceButtonClicked(4)">
+                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
+                </button>
+                <br>  <br> SPINVAE-2 <br> &nbsp;
+            </th>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave0" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step00.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave1" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step01.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave2" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step02.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave3" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step03.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave4" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step04.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave5" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step05.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(4, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq4_wave6" class="soundwave"/><br />
+                <img src="assets/interpolation/254_spinvae/spectrogram_step06.png"/>
+            </td>
+        </tr>
     </table>
 </div>
 
@@ -164,49 +190,6 @@ Contents:
             <td>Step 5/7</td>
             <td>Step 6/7</td>
             <td>Step 7/7</td>
-        </tr>
-        <tr> <!-- SPINVAE interp -->
-            <th scope="row">
-                <button type="button" onclick="onPlaySequenceButtonClicked(6)">
-                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
-                </button>
-                <br>  <br> SPINVAE-2 <br> &nbsp;
-            </th>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave0" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step00.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave1" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step01.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave2" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step02.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave3" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step03.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave4" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step04.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave5" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step05.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(6, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq6_wave6" class="soundwave"/><br />
-                <img src="assets/interpolation/263_spinvae/spectrogram_step06.png"/>
-            </td>
         </tr>
         <tr> <!-- REFERENCE interp -->
             <th scope="row">
@@ -251,6 +234,49 @@ Contents:
                 <img src="assets/interpolation/263_reference/spectrogram_step06.png"/>
             </td>
         </tr>
+        <tr> <!-- SPINVAE interp -->
+            <th scope="row">
+                <button type="button" onclick="onPlaySequenceButtonClicked(6)">
+                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
+                </button>
+                <br>  <br> SPINVAE-2 <br> &nbsp;
+            </th>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave0" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step00.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave1" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step01.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave2" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step02.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave3" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step03.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave4" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step04.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave5" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step05.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(6, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq6_wave6" class="soundwave"/><br />
+                <img src="assets/interpolation/263_spinvae/spectrogram_step06.png"/>
+            </td>
+        </tr>
     </table>
 </div>
 
@@ -278,49 +304,6 @@ Contents:
             <td>Step 5/7</td>
             <td>Step 6/7</td>
             <td>Step 7/7</td>
-        </tr>
-        <tr> <!-- SPINVAE interp -->
-            <th scope="row">
-                <button type="button" onclick="onPlaySequenceButtonClicked(0)">
-                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
-                </button>
-                <br>  <br> SPINVAE-2 <br> &nbsp;
-            </th>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave0" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step00.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave1" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step01.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave2" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step02.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave3" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step03.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave4" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step04.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave5" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step05.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(0, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq0_wave6" class="soundwave"/><br />
-                <img src="assets/interpolation/135_spinvae/spectrogram_step06.png"/>
-            </td>
         </tr>
         <tr> <!-- REFERENCE interp -->
             <th scope="row">
@@ -365,6 +348,49 @@ Contents:
                 <img src="assets/interpolation/135_reference/spectrogram_step06.png"/>
             </td>
         </tr>
+        <tr> <!-- SPINVAE interp -->
+            <th scope="row">
+                <button type="button" onclick="onPlaySequenceButtonClicked(0)">
+                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
+                </button>
+                <br>  <br> SPINVAE-2 <br> &nbsp;
+            </th>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave0" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step00.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave1" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step01.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave2" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step02.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave3" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step03.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave4" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step04.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave5" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step05.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(0, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq0_wave6" class="soundwave"/><br />
+                <img src="assets/interpolation/135_spinvae/spectrogram_step06.png"/>
+            </td>
+        </tr>
     </table>
 </div>
 
@@ -392,6 +418,49 @@ Contents:
             <td>Step 5/7</td>
             <td>Step 6/7</td>
             <td>Step 7/7</td>
+        </tr>
+        <tr> <!-- REFERENCE interp -->
+            <th scope="row">
+                <button type="button" id="playSequence3" onclick="onPlaySequenceButtonClicked(3)">
+                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
+                </button>
+                <br>  <br> Reference <br> (linear)
+            </th>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave0" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step00.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave1" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step01.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave2" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step02.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave3" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step03.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave4" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step04.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave5" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step05.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(3, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq3_wave6" class="soundwave"/><br />
+                <img src="assets/interpolation/6_reference/spectrogram_step06.png"/>
+            </td>
         </tr>
         <tr> <!-- SPINVAE interp -->
             <th scope="row">
@@ -438,49 +507,6 @@ Contents:
                 <img src="assets/interpolation/6_spinvae/spectrogram_step06.png"/>
             </td>
         </tr>
-        <tr> <!-- REFERENCE interp -->
-            <th scope="row">
-                <button type="button" id="playSequence3" onclick="onPlaySequenceButtonClicked(3)">
-                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
-                </button>
-                <br>  <br> Reference <br> (linear)
-            </th>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave0" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step00.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave1" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step01.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave2" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step02.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave3" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step03.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave4" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step04.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave5" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step05.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(3, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq3_wave6" class="soundwave"/><br />
-                <img src="assets/interpolation/6_reference/spectrogram_step06.png"/>
-            </td>
-        </tr>
     </table>
 </div>
 
@@ -508,49 +534,6 @@ Contents:
             <td>Step 5/7</td>
             <td>Step 6/7</td>
             <td>Step 7/7</td>
-        </tr>
-        <tr> <!-- SPINVAE interp -->
-            <th scope="row">
-                <button type="button" onclick="onPlaySequenceButtonClicked(8)">
-                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
-                </button>
-                <br>  <br> SPINVAE-2 <br> &nbsp;
-            </th>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave0" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step00.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave1" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step01.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave2" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step02.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave3" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step03.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave4" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step04.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave5" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step05.png"/>
-            </td>
-            <td>
-                <button type="button" onclick="onPlayButtonClicked(8, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
-                <img src="assets/svg/soundwave.svg" id="seq8_wave6" class="soundwave"/><br />
-                <img src="assets/interpolation/302_spinvae/spectrogram_step06.png"/>
-            </td>
         </tr>
         <tr> <!-- REFERENCE interp -->
             <th scope="row">
@@ -595,6 +578,49 @@ Contents:
                 <img src="assets/interpolation/302_reference/spectrogram_step06.png"/>
             </td>
         </tr>
+        <tr> <!-- SPINVAE interp -->
+            <th scope="row">
+                <button type="button" onclick="onPlaySequenceButtonClicked(8)">
+                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
+                </button>
+                <br>  <br> SPINVAE-2 <br> &nbsp;
+            </th>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 0)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave0" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step00.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 1)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave1" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step01.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 2)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave2" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step02.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 3)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave3" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step03.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 4)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave4" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step04.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 5)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave5" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step05.png"/>
+            </td>
+            <td>
+                <button type="button" onclick="onPlayButtonClicked(8, 6)"><img src="assets/svg/play.svg" class="play_button"/></button> &nbsp; 
+                <img src="assets/svg/soundwave.svg" id="seq8_wave6" class="soundwave"/><br />
+                <img src="assets/interpolation/302_spinvae/spectrogram_step06.png"/>
+            </td>
+        </tr>
     </table>
 </div>
 
@@ -607,29 +633,34 @@ Contents:
 
 # SPINVAE-2 Extrapolations
 
+The latent interpolation method can be used to perform extrapolations,
+i.e., some latent codes $ \mathbf{z}[t]$ can also be computed for $ t \leq 0 $ and $ t > T $.
+These extrapolated latent vectors can be decoded into extrapolated presets, whose timbre characteristics go beyond those of the two original presets.
+Examples below display interpolations made of $T = 7$ steps and $ 2 $ extrapolation steps on each side.
+
 ### Extrapolation example 1
 
 <div class="figure">
     <table>
         <tr>
             <th></th>
-            <th colspan="2" class="centered_th">&lt;--- Extrapolation</th>
-            <th>Preset</th>
+            <th colspan="2" class="centered_th"><div class="div_hline"><span class="span_hline">Extrapolation</span></div></th>
+            <th class="centered_th">Preset</th>
             <th></th>
             <th></th>
             <th></th>
             <th></th>
             <th></th>
-            <th>Preset</th>
-            <th colspan="2" class="centered_th">Extrapolation ---&gt;</th>
+            <th class="centered_th">Preset</th>
+            <th colspan="2" class="centered_th"><div class="div_hline"><span class="span_hline">Extrapolation</span></div></th>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td><em>BOUM</em></td>
-            <td colspan="5" class="centered_th">&lt;---------- Interpolation ----------&gt;</td>
-            <td><em>fuzzerro</em></td>
+            <td class="centered_th"><em>BOUM</em></td>
+            <td colspan="5" class="centered_th"><div class="div_hline"><span class="span_hline">Interpolation</span></div></td>
+            <td class="centered_th"><em>fuzzerro</em></td>
             <td></td>
             <td></td>
         </tr>
@@ -700,30 +731,29 @@ Contents:
 </div>
 
 
-
 ### Extrapolation example 2
 
 <div class="figure">
     <table>
         <tr>
             <th></th>
-            <th colspan="2" class="centered_th">&lt;--- Extrapolation</th>
-            <th>Preset</th>
+            <th colspan="2" class="centered_th"><div class="div_hline"><span class="span_hline">Extrapolation</span></div></th>
+            <th class="centered_th">Preset</th>
             <th></th>
             <th></th>
             <th></th>
             <th></th>
             <th></th>
-            <th>Preset</th>
-            <th colspan="2" class="centered_th">Extrapolation ---&gt;</th>
+            <th class="centered_th">Preset</th>
+            <th colspan="2" class="centered_th"><div class="div_hline"><span class="span_hline">Extrapolation</span></div></th>
         </tr>
         <tr>
             <td></td>
             <td></td>
             <td></td>
-            <td><em>INDIA 1</em></td>
-            <td colspan="5" class="centered_th">&lt;---------- Interpolation ----------&gt;</td>
-            <td><em>Tonewheel2</em></td>
+            <td class="centered_th"><em>INDIA 1</em></td>
+            <td colspan="5" class="centered_th"><div class="div_hline"><span class="span_hline">Interpolation</span></div></td>
+            <td class="centered_th"><em>Tonewheel2</em></td>
             <td></td>
             <td></td>
         </tr>
@@ -800,24 +830,6 @@ Contents:
 
 
 # Presets Modulation
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    jax: ["input/TeX", "output/HTML-CSS"],
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ["\\(", "\\)"] ],
-      displayMath: [ ['$$', '$$'], ["\\[", "\\]"] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-    //,
-    //displayAlign: "left",
-    //displayIndent: "2em"
-  });
-</script>
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
-</script>
 
 Under the Variational Auto-Encoder (VAE) framework, a preset $$\mathbf{u}$$ can be encoded as a Gaussian distribution $$ q \left( \mathbf{z} \mid \mathbf{u} \right) $$ in the latent space, where $$\mathbf{z}$$ denotes a latent vector.
 The distribution is defined as $$ q \left( \mathbf{z} \mid \mathbf{u} \right) = \mathcal{N} \left( \mathbf{z} ; \mu, \sigma^2 \right) $$ where $$\mu, \sigma$$ are output vectors from the Transformer encoder.

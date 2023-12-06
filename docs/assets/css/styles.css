@@ -36,7 +36,20 @@ tr.no-bottom-border td {
     border-bottom: none
 }
 
-.bestresult {
-    background-color:rgb(241, 241, 241);
-    font-weight: bold;
+.div_hline {
+    display: flex;
+    align-items: center; /* vertically center lines */
+  }
+  
+.div_hline::before,
+.div_hline::after {
+    content: '';
+    flex: 1; /* expand lines as much as possible */
+    background: #717171;
+    height: 2px;
 }
+
+.span_hline {
+    padding: 0 0.5em; /* slight padding between line and text */
+}
+
