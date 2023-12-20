@@ -311,13 +311,16 @@ def _average_f0(worker_args):
 
 
 
-def write_wav_and_mp3(base_path: pathlib.Path, base_name: str, samples, sr, ffmpeg_command="ffmpeg"):
+def write_wav_and_mp3(
+        base_path: pathlib.Path, base_name: str, samples, sr,
+        ffmpeg_command="ffmpeg", ffmpeg_options="-hide_banner -loglevel error"):
     """ Writes a .wav file and converts it to .mp3 using command-line ffmpeg (which must be available). """
     wav_path_str = "{}".format(base_path.joinpath(base_name + '.wav'))
     sf.write(wav_path_str, samples, sr)
     mp3_path_str = "{}".format(base_path.joinpath(base_name + '.mp3'))
     # mp3 320k will be limited to 160k for mono audio - still too much loss for HF content
-    os.system(f"{ffmpeg_command} -i '{wav_path_str}' -b:a 320k -y '{mp3_path_str}'")
+    os.system(f"{ffmpeg_command} {ffmpeg_options} -i '{wav_path_str}' -b:a 320k -y '{mp3_path_str}'")
+    return pathlib.Path(wav_path_str), pathlib.Path(mp3_path_str)
 
 
 

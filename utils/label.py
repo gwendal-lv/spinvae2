@@ -303,12 +303,14 @@ if __name__ == "__main__":
     # Run as main: for DEBUG purposes only
 
     import data.dataset
+    import pathlib
     ds_type = 'dexed'
 
     dataset_kwargs = {
         'note_duration': (3.0, 1.0), 'n_fft': 512, 'fft_hop': 256, 'Fs': 16000,
         'midi_notes': ((41, 75), (48, 75), (56, 75), (63, 75), (56, 25), (56, 127)),
-        'multichannel_stacked_spectrograms': True, 'data_storage_root_path': "/media/gwendal/Data/Datasets"
+        'multichannel_stacked_spectrograms': True,
+        'data_storage_root_path': pathlib.Path(__file__).joinpath('../../../Data_SSD/Datasets').resolve()
     }
 
     if ds_type == "dexed":

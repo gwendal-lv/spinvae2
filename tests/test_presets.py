@@ -25,7 +25,7 @@ class TestDexedDatasetLoader:
     def _create_and_pickle(self):
         print("\nLoading and storing a fresh dataset....")
         self.dataset = DexedDataset((3.0, 1.0), 512, 256, 16000, midi_notes=((56, 75), ),
-                                    data_augmentation=False, data_storage_root_path="/media/gwendal/Data/Datasets",
+                                    data_augmentation=False, data_storage_root_path="~/Jupyter/Data_SSD/Datasets",
                                     check_constrains_consistency=False,
                                     vst_params_learned_as_categorical=self.params_learned_as_cat)
         with open(self._dataset_pickle_filepath, 'wb') as f:

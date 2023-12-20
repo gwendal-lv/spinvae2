@@ -226,7 +226,7 @@ if __name__ == "__main__":
 
     _timbre_toolbox_path = '~/Documents/MATLAB/timbretoolbox'
     _root_path = pathlib.Path(__file__).resolve().parent.parent
-    _data_root_path = '/media/gwendal/Data/Logs/RefInterp/LinearNaive/interp9_valid'  # TODO anonymize
+    _data_root_path = _root_path.parent.joinpath('Data_SSD/Logs/RefInterp/LinearNaive/interp9_valid')
 
     #timbre_proc = InterpolationTimbreToolbox(_timbre_toolbox_path, _data_root_path, num_matlab_proc=8)
     #timbre_proc.run()

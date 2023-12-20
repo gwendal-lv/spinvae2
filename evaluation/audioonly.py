@@ -38,10 +38,12 @@ def run_evaluation(num_steps, storage_path, reference_storage_path):
 
 
 if __name__ == "__main__":
-    # FIXME ? pb multiproc spawn avec des donneés dans le main ?
+    # FIXME ?  multiproc spawn issue when data is in the __main__ section?
 
     _storage_path = pathlib.Path(
-        "/home/gwendal/Jupyter/spinvae_notebooks/generated_data/"
-        "export_audio__noAudIn_ARzCks_Dz512_cnn8x1_big_mixt3_audLR2e-04_b5e-05_g1e-02__interp7_test_audio2.0_0.5_trimmed"
+        pathlib.Path(__file__).joinpath(
+            "../../../spinvae_notebooks/generated_data/" 
+            "export_audio__noAudIn_ARzCks_Dz512_cnn8x1_big_mixt3_audLR2e-04_b5e-05_g1e-02__interp7_test_audio2.0_0.5_trimmed"
+        )
     )
     run_evaluation(7, _storage_path, _storage_path)

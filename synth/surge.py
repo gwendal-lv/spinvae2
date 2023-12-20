@@ -9,19 +9,20 @@ This file can be run as main script to update the JSON list of Surge patches ava
 # Quite dirty.... from https://github.com/surge-synthesizer/surge-python/blob/main/api-tutorial
 import sys
 from typing import List, Dict
-
-sys.path.append( "/home/gwendal/Jupyter/AudioPlugins/surge_build" )
-import surgepy  # Must be properly built and available from the folder above
-
-import numpy as np
 import pathlib
 import json
 from enum import IntEnum
 import copy
 import warnings
 
+import numpy as np
 import librosa
 from natsort import natsorted
+
+
+__surgepy_so_path = pathlib.Path(__file__).joinpath('../../../').resolve().joinpath('AudioPlugins/surge_build')
+sys.path.append(str(__surgepy_so_path))
+import surgepy  # Must be properly built and available from the folder above
 
 
 
