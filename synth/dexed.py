@@ -549,7 +549,7 @@ if __name__ == "__main__":
     if False:  # TODO remove after usage
         import pickle
 
-        with open("/home/gwendal/Jupyter/spinvae_notebooks/random_presets_mat.np.pickle", 'rb') as f:
+        with open("~/Jupyter/spinvae_notebooks/random_presets_mat.np.pickle", 'rb') as f:
             random_presets_mat = pickle.load(f)
         cart_name, cart_idx = "DATA_AUG", 12533
 

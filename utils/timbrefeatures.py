@@ -278,4 +278,6 @@ _post_distorsion_stats = {
 
 
 if __name__ == "__main__":
-    timbre_features = TimbreFeatures(pathlib.Path("/media/gwendal/Data/Datasets/Dexed/raw_timbre_features.df.pickle"))
+    timbre_features = TimbreFeatures(
+        pathlib.Path(__file__).joinpath('../../../Data_SSD/Datasets/Dexed/raw_timbre_features.df.pickle').resolve()
+    )
