@@ -31,19 +31,28 @@ classes: wide
 
 <link rel="stylesheet" href="assets/css/styles.css">
 
-*Authors: Gwendal Le Vaillant and Thierry Dutoit ([ISIA Lab](https://web.umons.ac.be/isia/), University of Mons)*
+*Authors: Gwendal Le Vaillant and Thierry Dutoit ([ISIA Lab](https://web.umons.ac.be/isia/), University of Mons). Last update: January 3, 2024.*
 
-TASLP submission, supplemental material. 
+Supplemental material, TASLP submission [(preprint available online)](https://doi.org/10.36227/techrxiv.170327281.10174081/v1). 
 Work in progress.
 
+
 Contents:
-- <a href="#interpolation-between-presets">Interpolation between presets</a>
+- <a href="#introduction---live-demonstration">Introduction - Live Demonstration</a>
+- <a href="#interpolation-between-presets">Interpolation Between Presets</a>
 - <a href="#spinvae-2-extrapolations">Extrapolation</a>
-- <a href="#presets-modulation">Presets modulation</a>
+- <a href="#presets-modulation">Presets Modulation</a> 
+
+---
+# Introduction - Live Demonstration
+
+The following video shows how the SPINVAE-2 model can perform morphings between DX7 presets.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jGm5GjYgH7M?si=hl7HfPKAKnn0wYaH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ---
 
-# Interpolation between presets
+# Interpolation Between Presets
 
 Preset interpolation is usually performed by computing a linear interpolation on each individual synthesis parameter.
 This method is called <em>Reference (linear)</em>.
