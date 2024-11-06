@@ -635,6 +635,9 @@ Examples below use $$T = 7$$ interpolation steps for both methods.
 </div>
 
 
+### Other examples
+
+Additional examples are [available on a separate webpage](detailed).
 
 ---
 

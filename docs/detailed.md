@@ -40,7 +40,7 @@ This page provides complementary and detailed results comparing three methods:
 
 For each preset interpolation or morphing example, trajectories of key timbre features are displayed. To maintain clarity, only four features (those most closely correlated with subjective evaluations of morphing quality) are shown.
 
-The following examples are available:
+The following additional examples are available:
 - <a href="#interpolation-example-6">Example 6</a>: from "E.Piano 23" to "B3 Organ 3"
 - <a href="#interpolation-example-7">Example 7</a>: from "AnlgSyn.45" to "ClinkieBel"
 - <a href="#interpolation-example-8">Example 8</a>: from "LOG DRUMS" to "Hard.Money"
