@@ -32,6 +32,10 @@ p, li {
     text-align: center;
 }
 
+.right_text_align {
+    text-align: right;
+}
+
 tr.no-bottom-border td {
     border-bottom: none
 }

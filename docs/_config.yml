@@ -18,10 +18,11 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Interpolation of Synthesizer Presets using Timbre-Regularized Auto-Encoders
+title: Latent Space Interpolation of Synthesizer Parameters Using Timbre-Regularized Auto-Encoders
 email: Gwendal.LEVAILLANT@umons.ac.be
 description: >- # this means to ignore newlines until "baseurl:"
-  IEEE/ACM TASLP submission, supplemental material
+  Latent Space Interpolation of Synthesizer Parameters Using Timbre-Regularized Auto-Encoders; 
+  IEEE/ACM TASLP 2024 article, supplemental material
 
 # Use empty (base)url for local dev
 #baseurl: ""

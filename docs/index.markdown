@@ -31,10 +31,11 @@ classes: wide
 
 <link rel="stylesheet" href="assets/css/styles.css">
 
-*Authors: Gwendal Le Vaillant and Thierry Dutoit ([ISIA Lab](https://web.umons.ac.be/isia/), University of Mons). Last update: January 3, 2024.*
+*Authors: Gwendal Le Vaillant and Thierry Dutoit ([ISIA Lab](https://web.umons.ac.be/isia/), University of Mons)*
 
-Supplemental material, TASLP submission [(preprint available online)](https://doi.org/10.36227/techrxiv.170327281.10174081/v1). 
-Work in progress.
+Supplemental material for the article:
+
+G. Le Vaillant and T. Dutoit, "Latent Space Interpolation of Synthesizer Parameters Using Timbre-Regularized Auto-Encoders," in *IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)*, vol. 32, pp. 3379-3392, 2024, [https://ieeexplore.ieee.org/document/10596701](https://ieeexplore.ieee.org/document/10596701). 
 
 
 Contents:

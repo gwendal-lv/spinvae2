@@ -1,0 +1,283 @@
+// This file is mostly a duplicate of listen.js, except the list of available audio .mp3
+
+audio_static_filenames = [  
+    [  // Sequences 0, 1, 2 : interp/morphing    [77275] 'AnlgSyn.45' --> [71973] 'ClinkieBel'
+        'assets/detailed/254/linear/audio_step00.mp3',
+        'assets/detailed/254/linear/audio_step01.mp3',
+        'assets/detailed/254/linear/audio_step02.mp3',
+        'assets/detailed/254/linear/audio_step03.mp3',
+        'assets/detailed/254/linear/audio_step04.mp3',
+        'assets/detailed/254/linear/audio_step05.mp3',
+        'assets/detailed/254/linear/audio_step06.mp3',
+        'assets/detailed/254/linear/audio_step07.mp3',
+        'assets/detailed/254/linear/audio_step08.mp3',
+    ],
+    [
+        'assets/detailed/254/spinvae/audio_step00.mp3',
+        'assets/detailed/254/spinvae/audio_step01.mp3',
+        'assets/detailed/254/spinvae/audio_step02.mp3',
+        'assets/detailed/254/spinvae/audio_step03.mp3',
+        'assets/detailed/254/spinvae/audio_step04.mp3',
+        'assets/detailed/254/spinvae/audio_step05.mp3',
+        'assets/detailed/254/spinvae/audio_step06.mp3',
+        'assets/detailed/254/spinvae/audio_step07.mp3',
+        'assets/detailed/254/spinvae/audio_step08.mp3',
+    ],
+    [
+        'assets/detailed/254/smt/audio_step00.mp3',
+        'assets/detailed/254/smt/audio_step01.mp3',
+        'assets/detailed/254/smt/audio_step02.mp3',
+        'assets/detailed/254/smt/audio_step03.mp3',
+        'assets/detailed/254/smt/audio_step04.mp3',
+        'assets/detailed/254/smt/audio_step05.mp3',
+        'assets/detailed/254/smt/audio_step06.mp3',
+        'assets/detailed/254/smt/audio_step07.mp3',
+        'assets/detailed/254/smt/audio_step08.mp3',
+    ],
+
+    [  // Sequences 3, 4, 5 : interp/morphing    [79045] 'E.Piano 23' --> [489] 'B3 Organ 3'
+        'assets/detailed/263/linear/audio_step00.mp3',
+        'assets/detailed/263/linear/audio_step01.mp3',
+        'assets/detailed/263/linear/audio_step02.mp3',
+        'assets/detailed/263/linear/audio_step03.mp3',
+        'assets/detailed/263/linear/audio_step04.mp3',
+        'assets/detailed/263/linear/audio_step05.mp3',
+        'assets/detailed/263/linear/audio_step06.mp3',
+        'assets/detailed/263/linear/audio_step07.mp3',
+        'assets/detailed/263/linear/audio_step08.mp3',
+    ],
+    [
+        'assets/detailed/263/spinvae/audio_step00.mp3',
+        'assets/detailed/263/spinvae/audio_step01.mp3',
+        'assets/detailed/263/spinvae/audio_step02.mp3',
+        'assets/detailed/263/spinvae/audio_step03.mp3',
+        'assets/detailed/263/spinvae/audio_step04.mp3',
+        'assets/detailed/263/spinvae/audio_step05.mp3',
+        'assets/detailed/263/spinvae/audio_step06.mp3',
+        'assets/detailed/263/spinvae/audio_step07.mp3',
+        'assets/detailed/263/spinvae/audio_step08.mp3',
+    ],
+    [
+        'assets/detailed/263/smt/audio_step00.mp3',
+        'assets/detailed/263/smt/audio_step01.mp3',
+        'assets/detailed/263/smt/audio_step02.mp3',
+        'assets/detailed/263/smt/audio_step03.mp3',
+        'assets/detailed/263/smt/audio_step04.mp3',
+        'assets/detailed/263/smt/audio_step05.mp3',
+        'assets/detailed/263/smt/audio_step06.mp3',
+        'assets/detailed/263/smt/audio_step07.mp3',
+        'assets/detailed/263/smt/audio_step08.mp3',
+    ],
+];
+
+// Seems to solve the Safari (iOS and macOS) issue: sounds sometimes does not play
+//    The issue was observed on the 'instructions' pages. So it *probably* comes from
+//    not using the audio/buttons for a few dozens of seconds.
+// autoSuspend's default is true (sound engine stops after 30s)
+Howler.autoSuspend = false;
+HowlerGlobal.autoSuspend = false;
+
+__debug_prints = false;
+
+// Sounds - "Automatic caching for improved performance"
+let sounds = [];  // 1st dim: sequence (we may have only 1); 2nd dim: actual audio filename
+for (let i=0; i < audio_static_filenames.length; i++) {
+    sounds.push([]);
+    audio_static_filenames[i].forEach(
+        audio_filename => sounds[i].push(new Howl({
+            src: [audio_filename],
+            onload: function() {
+                //console.log("SOUND LOADED");
+            },
+            onloaderror: function(sound_ID, error_code) {
+                console.log("SOUND LOAD ERROR id = " + sound_ID + '   code = ' + error_code);
+            },
+            onplayerror: function(sound_ID, error_code) {
+                console.log("SOUND PLAY ERROR id = " + sound_ID + '   code = ' + error_code);
+            },
+        }))
+    );
+}
+
+
+// ==================== Global vars and utility functions ====================
+
+var isPlayingWholeSequence = false;
+var currentSequenceIndex = -1;  // sequence being played (or just 1 sound from this seq is being played)
+var currentSoundIndex = sounds.length;  // index of the sound being played
+
+window.onload = (event) => {
+};
+
+
+function playSound(seq_index, sound_idx) {
+    if (__debug_prints)
+        console.log("playSound(seq_index=" + seq_index + ", sound_index=" + sound_idx + ")");
+    sounds[seq_index][sound_idx].play();
+    document.getElementById("seq" + seq_index + "_wave" + sound_idx).style.visibility = 'visible';
+}
+
+function stopAllSounds() {
+    // Stop all sounds, disable the corresponding waveforms
+    for (let seq_index = 0; seq_index < sounds.length ; seq_index++) {
+        for (const [index, sound] of sounds[seq_index].entries()) {
+            sound.stop();
+            soundwave_image = document.getElementById("seq" + seq_index + "_wave" + index);
+            if (soundwave_image === null)
+                console.error("ID 'seq" + seq_index + "_wave" + index + "' can't be found");
+            soundwave_image.style.visibility = 'hidden';
+        }
+    }
+}
+
+
+// ==================== Callbacks from howler.js  ====================
+for (let seq_index = 0; seq_index < sounds.length ; seq_index++) {
+    for (const [__index, sound] of sounds[seq_index].entries()) {
+        sound.on('end', function () {
+            onSoundEnds(seq_index, __index)  // TODO register callbacks during construction of Howl objects
+        });
+    }
+}
+
+function onSoundEnds(seq_index, sound_index) {
+    document.getElementById("seq" + seq_index + "_wave" + sound_index).style.visibility = 'hidden';
+
+    if (isPlayingWholeSequence) {
+        if (currentSequenceIndex < 0 || currentSequenceIndex >= sounds.length)
+            throw new Error("Invalid currentSequenceIndex value: " + currentSequenceIndex);
+        // A/B sequence, or not? negative indices indicate start/end before playing the actual sequence
+        if (currentSoundIndex < 0) {
+            if (currentSoundIndex === -2)
+                playSound(currentSequenceIndex, sounds[currentSequenceIndex].length - 1);
+            else if (currentSoundIndex === -1)
+                playSound(currentSequenceIndex, 0);
+            else
+                throw new Error("Invalid currentSoundIndex value: " + currentSoundIndex + ". onSoundEnds index is " + sound_index);
+            currentSoundIndex += 1;
+        }
+        else {  // "normal" sequence playing (consecutive samples only)
+            if (sound_index < (sounds[currentSequenceIndex].length - 1)) {  // keep playing?
+                playSound(currentSequenceIndex, sound_index + 1);
+                currentSoundIndex += 1;
+            }
+            else { // otherwise: end of sequence - everything has been played
+                isPlayingWholeSequence = false;
+                currentSequenceIndex = -1;
+            }
+        }
+    }
+}
+
+
+// ==================== Callbacks on user input ====================
+function onPlayButtonClicked(seq_index, sound_idx) {
+    if (__debug_prints)
+        console.log("onPlay:    seq_index: " + seq_index + "   sound_idx: " + sound_idx);
+
+    // We consider that the user forces the sequence to stop (if was playing)
+    isPlayingWholeSequence = false;
+    currentSequenceIndex = -1;
+    currentSoundIndex = sounds.length;
+    // stop all, Then start the new one
+    stopAllSounds();
+    playSound(seq_index, sound_idx);
+}
+
+function onPlaySequenceButtonClicked(seq_index) {  // Plays the full sequence, once
+    if (__debug_prints)
+        console.log("playSeq " + seq_index);
+
+    isPlayingWholeSequence = false;
+    currentSequenceIndex = -1;
+    stopAllSounds();
+    // Trigger the first sound, each sound will trigger the next one on own end
+    currentSoundIndex = 0;
+    isPlayingWholeSequence = true;
+    currentSequenceIndex = seq_index;
+    playSound(seq_index, 0);
+}
+
+function onPlayABSequenceButtonClicked(seq_index) {  // Play A (start sample), then B (end sample), then the full sequence
+    if (__debug_prints)
+        console.log("playABSeq " + seq_index);
+
+    isPlayingWholeSequence = false;
+    currentSequenceIndex = -1;
+    stopAllSounds();
+    // Trigger the first sound, each sound will trigger the next one on own end
+    currentSoundIndex = -2;  // -2 correspond to A, -1 to B, and 0 indicates the first "normal" seq index
+    isPlayingWholeSequence = true;
+    currentSequenceIndex = seq_index;
+    playSound(seq_index, 0);  // on Sound Ends will handle the following sounds
+}
+
+
+
+
+
+// ==============================================================================
+// ================== Single (isolated) samples: play and stop ==================
+
+single_sounds_filenames = [
+    'assets/latent_variations/018765_sigma2.0/original.mp3',
+    'assets/latent_variations/018765_sigma2.0/variations.mp3',
+    'assets/latent_variations/018765_sigma3.0/variations.mp3',
+    'assets/latent_variations/021232_sigma2.0/original.mp3',
+    'assets/latent_variations/021232_sigma2.0/variations.mp3',
+    'assets/latent_variations/021232_sigma3.0/variations.mp3',
+]
+
+// Sounds - "Automatic caching for improved performance"
+let single_sounds = [];  // 1st dim: sequence (we may have only 1); 2nd dim: actual audio filename
+for (const [__index, audio_filename] of single_sounds_filenames.entries()) {
+    single_sounds.push(new Howl({
+        src: [audio_filename],
+        onload: function() {
+            if (__debug_prints)
+                console.log("Single sound # " + __index + " : " + audio_filename + " loaded.");
+        },
+        onloaderror: function(sound_ID, error_code) {
+            console.log("SOUND LOAD ERROR id = " + sound_ID + '   code = ' + error_code);
+        },
+        onplayerror: function(sound_ID, error_code) {
+            console.log("SOUND PLAY ERROR id = " + sound_ID + '   code = ' + error_code);
+        },
+        onend: function() { onSingleSoundEnds(__index); },  // NOT called when forced to stop
+    }));
+    // Cannot register this callback during construction...
+    //single_sounds[__index].on('end', function() { console.log("END CALLBACK"); onSingleSoundEnds(__index); });
+}
+
+/*
+for (const [__index, sound] of single_sounds.entries()) {
+    sound.on('end', function () {
+        onSingleSoundEnds(__index)  // TODO register callbacks during construction of Howl objects
+    });
+}
+*/
+
+function onSingleSoundEnds(sound_index) {
+    if (__debug_prints)
+        console.log("Single sound #" + sound_index + " had ended.")
+    // Hide waveform
+    document.getElementById("singleWave" + sound_index).style.visibility = 'hidden';
+}
+
+function onPlaySingleSound(sound_index) {
+    if (__debug_prints)
+        console.log("Playing single sound #" + sound_index);
+
+    single_sounds[sound_index].stop(); // otherwise, multiple plays are allowed
+    single_sounds[sound_index].play();
+    document.getElementById("singleWave" + sound_index).style.visibility = 'visible';
+}
+
+function onStopSingleSound(sound_index) {
+    if (__debug_prints)
+        console.log("Stopping single sound #" + sound_index);
+
+    single_sounds[sound_index].stop();
+    onSingleSoundEnds(sound_index);  // this callback is not auto-called when sound if stopped "by hand"
+}
+
