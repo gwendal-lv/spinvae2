@@ -82,7 +82,7 @@ Examples below use $$T = 9$$ interpolation steps for both methods.
         <tr  class="no-bottom-border"> 
             <th scope="row">
                 <button type="button" id="playSequence3" onclick="onPlaySequenceButtonClicked(3)">
-                    <img src="../assets/svg/play.svg" class="play_button"/>  <br> Play all
+                    <img src="assets/svg/play.svg" class="play_button"/>  <br> Play all
                 </button>
             </th>
             <td>
@@ -123,7 +123,7 @@ Examples below use $$T = 9$$ interpolation steps for both methods.
             </td>
         </tr>
         <tr>
-            <td colspan="10"><img src="../assets/detailed/263/linear/spec_and_features.png"/></td>
+            <td colspan="10"><img src="assets/detailed/263/linear/spec_and_features.png"/></td>
         </tr>
         <tr>  <!-- SPINVAE interp -->
             <th colspan="10" >SPINVAE preset interpolation (linearity = -0.39 ; smoothness = -39.2)</th>  
