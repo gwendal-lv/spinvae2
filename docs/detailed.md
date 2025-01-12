@@ -126,7 +126,7 @@ The following additional examples are available:
         <tr  class="no-bottom-border"> 
             <td></td>
             <td colspan=5>Start sound reconstruction:<br/>MFCCD = 0<br/>PEMO-Q ODG = 0</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.3<br/>PEMO-Q ODG = -0.01</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.4<br/>PEMO-Q ODG = -0.01</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -179,8 +179,8 @@ The following additional examples are available:
         </tr>
         <tr  class="no-bottom-border"> 
             <td></td>
-            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 3.0<br/>PEMO-Q ODG = -0.68</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 4.0<br/>PEMO-Q ODG = -1.66</td>
+            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 3.9<br/>PEMO-Q ODG = -0.68</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 5.5<br/>PEMO-Q ODG = -1.66</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -314,8 +314,8 @@ The following additional examples are available:
         </tr>
         <tr  class="no-bottom-border"> 
             <td></td>
-            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 0.36<br/>PEMO-Q ODG = -0.03</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.05<br/>PEMO-Q ODG = -0.01</td>
+            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 0.5<br/>PEMO-Q ODG = -0.03</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.1<br/>PEMO-Q ODG = -0.01</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -368,8 +368,8 @@ The following additional examples are available:
         </tr>
         <tr  class="no-bottom-border"> 
             <td></td>
-            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 3.5<br/>PEMO-Q ODG = -0.67</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 5.3<br/>PEMO-Q ODG = -0.49</td>
+            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 4.2<br/>PEMO-Q ODG = -0.67</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 6.5<br/>PEMO-Q ODG = -0.49</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -502,7 +502,7 @@ The following additional examples are available:
         <tr  class="no-bottom-border"> 
             <td></td>
             <td colspan=5>Start sound reconstruction:<br/>MFCCD = 0.0<br/>PEMO-Q ODG = -0.00</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.25<br/>PEMO-Q ODG = -0.00</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.3<br/>PEMO-Q ODG = -0.00</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -555,8 +555,8 @@ The following additional examples are available:
         </tr>
         <tr  class="no-bottom-border"> 
             <td></td>
-            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 3.5<br/>PEMO-Q ODG = -2.27</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 8.7<br/>PEMO-Q ODG = -0.93</td>
+            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 5.5<br/>PEMO-Q ODG = -2.27</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 10.6<br/>PEMO-Q ODG = -0.93</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -689,8 +689,8 @@ The following additional examples are available:
         </tr>
         <tr  class="no-bottom-border"> 
             <td></td>
-            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 2.3<br/>PEMO-Q ODG = -2.55</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.48<br/>PEMO-Q ODG = -0.05</td>
+            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 2.7<br/>PEMO-Q ODG = -2.55</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 0.6<br/>PEMO-Q ODG = -0.05</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
@@ -743,8 +743,8 @@ The following additional examples are available:
         </tr>
         <tr  class="no-bottom-border"> 
             <td></td>
-            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 35.7<br/>PEMO-Q ODG = -2.43</td>
-            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 7.2<br/>PEMO-Q ODG = -0.54</td>
+            <td colspan=5>Start sound reconstruction:<br/>MFCCD = 42.3<br/>PEMO-Q ODG = -2.43</td>
+            <td colspan=4 class="right_text_align">End sound reconstruction:<br/>MFCCD = 9.0<br/>PEMO-Q ODG = -0.54</td>
         </tr>
         <tr  class="no-bottom-border"> 
             <th scope="row">
